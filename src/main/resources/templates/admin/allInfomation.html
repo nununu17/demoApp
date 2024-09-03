@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>all information</title>
+    <link rel="stylesheet" th:href="@{/css/allInformation.css}" />
+  </head>
+  <body>
+    <div class="bread" style="text-align: right;">
+      <a th:href="top">管理者トップ</a>
+      <p>all information</p>
+    </div>
+    <div class="title" th:text="${title}" style="font-size: 40px;">
+    </div>
+
+    <div class="table" style="text-align: center;">
+      <table>
+        <tr>
+          <th>id</th>
+          <th></th>
+          <th>name</th>
+          <th></th>
+          <th>genre</th>
+          <th></th>
+          <th>area</th>
+          <th></th>
+          <th>TAG: is plannning</th>
+          <th></th>
+          <th>TAG: my recommendation</th>
+          <th></th>
+          <th>TAG: is halt</th>
+          <th></th>
+        </tr>
+        <tr th:each="eachInfo:${allInfo}">
+          <td th:text="${eachInfo.id}"></td>
+          <td>   </td>
+          <td th:text="${eachInfo.name}"></td>
+          <td>   </td>
+          <td th:text="${eachInfo.genre}"></td>
+          <td>   </td>
+          <td th:text="${eachInfo.area}"></td>
+          <td>   </td>
+          <td th:text="${eachInfo.today}"></td>
+          <td>   </td>
+          <td th:text="${eachInfo.myRecommendation}"></td>
+          <td>   </td>
+          <td th:text="${eachInfo.haltFlag}"></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
