@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>all information</title>
+  </head>
+  <body>
+    <div class="title" th:text="${title}">
+    </div>
+
+    <div class="table">
+      <table>
+        <tr th:each="eachInfo:${allInfo}">
+          <td th:text="${eachInfo.id}"></td>
+          <td th:text="${eachInfo.name}"></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/top.css}" />
+  <title>top</title>
+</head>
+<body>
+  <div class="header">
+  </div>
+  <div class="top">
+    <div class="flush">
+      <div class="fadeIn">HAPPY UNBIRTHDAY <br> ~なんでもない日おめでとう~</div>
+    </div>
+    <div class="title">TOKYO DISNEY SEA 20240908</div>
+    <div class="topImage">
+      <img src="/images/believeAriel.jpg">
+    </div>
+    <p class="welcome">ようこそ、東京ディズニーシーへ</p>
+  </div>
+  <div class="button-block">
+    <div class="button">
+      <a href="https://www.tokyodisneyresort.jp/tds/">チケットを確認する</a>
+      <a th:href="@{/tdr/tds/today}">「TODAY」</a>
+    </div>
+  </div>
+  <br>
+  <hr> 
+  <div class="wayOfEnjoy">
+    <h4 class="headline">楽しみ方たくさん！</h4> 
+    <table class="recommendation">
+      <tr>
+        <th><a class="recomHeader" href="https://www.tokyodisneyresort.jp/tds/restaurant.html">→食べる</a></th>
+        <th><a class="recomHeader" href="https://www.tokyodisneyresort.jp/tds/show.html">観る</a></th>
+        <th><a class="recomHeader" href="https://www.tokyodisneyresort.jp/tds/attraction.html">遊ぶ</a> </th>
+        <th><a class="recomHeader" href="https://www.tokyodisneyresort.jp/tds/shop.html">買う</a> </th>
+        <th><a class="recomHeader" href="https://www.tokyodisneyresort.jp/tds/greeting.html">会う</a> </th>
+      </tr>
+      <tr>
+        <td><img class="recoPhoto" src="/images/eating.png"></td>
+        <td><img class="recoPhoto" src="/images/show.png"></td>
+        <td><img class="recoPhoto" src="\images\riding.png"></td>
+        <td><img class="recoPhoto" src="\images\buying.png"></td>
+        <td><img class="recoPhoto" src="\images\greeting.png"></td>
+      </tr>
+    </table>
+    <hr class="headline">
+  </div>
+  <footer>  
+    <div class="footer">
+      <a href="https://www.tokyodisneyresort.jp/tds/">東京ディズニーリゾート公式HP</a>｜
+      <a href="http://www.olc.co.jp/index.html">株式会社オリエンタルランド</a>｜
+      <a href="https://www.disney.co.jp/" target="_blank">Disney.jp</a>
+    </div>
+    <p>©Hello World, nununu</p>
+  </footer>
+  </body>
+</html>

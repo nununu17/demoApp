@@ -1,0 +1,72 @@
+.top {
+  position: relative;
+  background-color: #04536f;
+  width: 100%;
+  text-align: center;
+}
+
+.TODAY {
+  font-size: 200px;
+  color: violet;
+  font-family: "Aclonica", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.date {
+  font-size: 80px;
+  text-align: center;
+  color: palevioletred;
+}
+
+.underToday{
+  display: flex;
+  max-width: 1000px;
+}
+
+.open {
+  color: beige;
+  text-align: center;
+}
+
+.fsMMP {
+  text-align: end;
+}
+
+.fsMM {
+  width: 40%;
+}
+
+.wantToDo {
+  text-align: center;
+}
+
+.tablePhoto {
+  width: 30%;
+}
+
+.addPlan {
+  text-align: justify;
+}
+
+h3 {
+  color: aliceblue;
+  background-color: #007788;
+}
+
+.attraction {
+  text-align: center;
+}
+
+.food {
+  text-align: center;
+}
+
+footer {
+  bottom: 0;
+  display: block;
+  color: black;
+  text-decoration: none;
+  font-size: 10px;
+  text-align: center;
+}
