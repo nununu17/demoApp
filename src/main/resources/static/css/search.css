@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.header{
+  font-size: 40px;
+}
+
+.search label{
+  font-size: 20px;
+}
+
+.btn{
+  text-align: center;
+}
+
+.submitBtn{
+  height: 30px;
+  width: 100px;
+  color: chartreuse
+}
+
+.result{
+  border-spacing: 40px 10px;
+}

@@ -23,4 +23,7 @@ public class Service {
 		return dao.showAllInfo();
 	}
 
+	public List<TdsInfoEntity> search(String name, String genre, String area, boolean isHaltFlag){
+		return dao.search(name, genre, area, isHaltFlag);
+	}
 }

@@ -1,0 +1,17 @@
+.bread{
+  list-style: none;
+  text-align: right;
+}
+
+.bread li{
+  display: inline;
+}
+
+.bread li::after{
+  content: '/';
+  padding: 0.5cm;
+}
+
+.bread li:last-child::after{
+  content: '';
+}

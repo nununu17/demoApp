@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>検索結果</title>
+  <link rel="stylesheet" th:href="@{/css/bread.css}" />
+  <link rel="stylesheet" th:href="@{/css/search.css}" />
+</head>
+
+<body>
+  <ul class="bread">
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <a itemprop="item" th:href="@{/user}">
+        <span itemprop=”name”>top</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <a itemprop="item" th:href="@{/user/search}">
+        <span itemprop=”name”>search</span>
+      </a>
+      <meta itemprop="position" content="2" />
+    </li>
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <span itemprop=”name”>search result</span>
+      <meta itemprop="position" content="3" />
+    </li>
+  </ul>
+  
+  <div class="required" th:each="form:${searchForm}">
+     <p class="header">指定された検索条件：</p>
+    <div id="name">
+      名前：<soan th:text="*{form.name}"></soan>
+    </div>
+    <div id="genre">
+      ジャンル：<span th:text="*{form.genre}"></span>
+    </div>
+    <div id="area">
+      エリア：<span th:text="*{form.area}"></span>
+    </div>
+  </div>
+
+  <div class="header">
+    <p>検索結果</p>
+  </div>
+
+  <table class="result">
+    <tr>
+      <th>名前</th>
+      <th>ジャンル</th>
+      <th>エリア</th>
+    </tr>
+    <tr th:each="result:${resultList}">
+      <td th:text="*{result.name}"></td>
+      <td th:text="*{result.genre}"></td>
+      <td th:text="*{result.area}"></td>
+    </tr>
+  </table>
+
+</body>
+
+</html>

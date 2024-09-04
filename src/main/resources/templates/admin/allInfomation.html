@@ -3,12 +3,21 @@
   <head>
     <title>all information</title>
     <link rel="stylesheet" th:href="@{/css/allInformation.css}" />
+    <link rel="stylesheet" th:href="@{/css/bread.css}"/>
   </head>
   <body>
-    <div class="bread" style="text-align: right;">
-      <a th:href="top">管理者トップ</a>
-      <p>all information</p>
-    </div>
+    <ul class="bread">
+      <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+        <a itemprop="item" th:href="@{/admin}">
+          <span itemprop=”name”>admin top</span>
+        </a>
+        <meta itemprop="position" content="1" />
+      </li>
+      <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+          <span itemprop=”name”>show all information</span>
+        <meta itemprop="position" content="2" />
+      </li>
+    </ul>
     <div class="title" th:text="${title}" style="font-size: 40px;">
     </div>
 

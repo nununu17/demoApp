@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>検索</title>
+  <link rel="stylesheet" th:href="@{/css/bread.css}" />
+  <link rel="stylesheet" th:href="@{/css/search.css}" />
+</head>
+
+<body>
+  <ul class="bread">
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <a itemprop="item" th:href="@{/user}">
+        <span itemprop=”name”>top</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <span itemprop=”name”>search</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ul>
+  <div class="header">
+    <p>検索ページ</p>
+  </div>
+
+  <div class="search">
+    <form th:action="@{/user/search/done}" th:object="${searchForm}">
+      <div class="">
+        <label>名前で検索：
+          <input type="text" placeholder="名前を入力してください" th:field="*{name}">
+        </label>
+      </div>
+      <div class="">
+        <label>ジャンルで検索：
+          <select th:field="*{genre}">
+            <option value="">ジャンルを選択してください</option>
+            <option value="attraction">アトラクション</option>
+            <option value="entertainment">エンターテイメント施設</option>
+            <option value="greeting">キャラクターグリーティング施設</option>
+            <option value="shop">ショップ</option>
+            <option value="restaurant">レストラン</option>
+            <option value="mo">レストラン(MO可)</option>
+            <option value="ps">レストラン(ps対象)</option>
+            <option value="popcorn">ポップコーンワゴン</option>
+            <option value="others">そのほか施設</option>
+          </select>
+        </label>
+      </div>
+      <div class="">
+        <label>エリアで検索：
+          <select th:field="*{area}">
+            <option value="">エリアを選択してください</option>
+            <option value="MH">メディテレニアンハーバー</option>
+            <option value="AF">アメリカンウォーターフロント</option>
+            <option value="PD">ポートディスカバリー</option>
+            <option value="LD">ロストリバーデルタ</option>
+            <option value="AC">アラビアンコースト</option>
+            <option value="ML">マーメイドラグーン</option>
+            <option value="MI">ミステリアスアイランド</option>
+            <option value="FS">ファンタジースプリングス</option>
+          </select>
+        </label>
+      </div>
+      <div class="">
+        <label>タグで検索：
+          <input type="checkbox" th:field="*{haltFlag}">休止中
+          <input type="checkbox" th:field="*{myRecommendation}">わたしのおすすめ
+          <input type="checkbox" th:field="*{today}">Today!
+        </label><br>
+      </div>
+      <div class="btn">
+        <button type="submit" class="submitBtn">検索</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="result"></div>
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>admin top</title>
+  <link rel="stylesheet" th:href="@{/css/bread.css}" />
+</head>
+
+<body>
+  <ul class="bread">
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <span itemprop=”name”>admin top</span>
+      <meta itemprop="position" content="1" />
+    </li>
+  </ul>
+  <div class="header">
+    <h1>hello admin</h1>
+  </div>
+  <div class="toAdminEach">
+    <a th:href="@{/admin/showAll}">全データ表示</a>
+    <a th:href="@{/user/search}">検索ページ</a>
+  </div>
+</body>
+
+</html>
