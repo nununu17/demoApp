@@ -38,6 +38,11 @@ public class Dao {
 	}
 
 	public List<TdsInfoEntity> search(String name, String genre, String area, boolean isHaltFlag) {
+		
+		//parameterSourceは自動で''を結合してしまうので、
+		//あらかじめ%%をname変数の前後に加えておくことであいまい検索を可能にする
+		name = "%" + name + "%";
+		
 		StringBuilder sbSql = new StringBuilder();
 		sbSql.append("SELECT i.name name, g.disp_name genre, a.disp_name area ");
 		sbSql.append("FROM tds_info i ");
@@ -45,28 +50,30 @@ public class Dao {
 		sbSql.append("LEFT OUTER JOIN area a ON i.area = a.num ");
 		
 		if(name != "") {
-			sbSql.append("WHERE i.name = :name ");
+			sbSql.append("WHERE i.name LIKE :name ");
 			if(genre != "") {
 				sbSql.append("and g.name = :genre ");
 				if(area != "") {
-					sbSql.append("and a.name = :area");
+					sbSql.append("and a.name = :area ");
 				}
 			}
 			if(area != "") {
-				sbSql.append("and a.name = :area");
+				sbSql.append("and a.name = :area ");
 			}
 		}else if(genre != "") {
 			sbSql.append("WHERE g.name = :genre ");
 			if(area != "") {
-				sbSql.append("and a.name = :area");
+				sbSql.append("and a.name = :area ");
 			}
 		}else if(area != "") {
-			sbSql.append("WHERE a.name = :area");
+			sbSql.append("WHERE a.name = :area ");
 		}
 		
 		if(isHaltFlag) {
-			sbSql.append("WHERE halt_flag = 1");
+			sbSql.append("WHERE halt_flag = 1 ");
 		}
+		
+		sbSql.append("ORDER BY id;");
 		
 		var rowMapper = BeanPropertyRowMapper.newInstance(TdsInfoEntity.class);
 

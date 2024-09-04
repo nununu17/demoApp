@@ -19,10 +19,12 @@ public class Service {
 		this.dao = dao;
 	}
 	
+	@Transactional
 	public List<TdsInfoEntity> showAllInfo(){
 		return dao.showAllInfo();
 	}
 
+	@Transactional
 	public List<TdsInfoEntity> search(String name, String genre, String area, boolean isHaltFlag){
 		return dao.search(name, genre, area, isHaltFlag);
 	}
