@@ -9,7 +9,7 @@
 <body>
   <ul class="bread">
     <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
-      <span itemprop=”name”>admin top</span>
+      <span itemprop=”name”>管理者トップ</span>
       <meta itemprop="position" content="1" />
     </li>
   </ul>
@@ -17,8 +17,9 @@
     <h1>hello admin</h1>
   </div>
   <div class="toAdminEach">
-    <a th:href="@{/admin/showAll}">全データ表示</a>
-    <a th:href="@{/user/search}">検索ページ</a>
+    <a th:href="@{/admin/show}">表示</a>
+    <a th:href="@{/admin/edit}">編集</a>
+    <a th:href="@{/user/search}">検索<span>(ユーザーページに飛びます)</span></a>
   </div>
 </body>
 

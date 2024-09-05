@@ -7,6 +7,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.model.AreaEntity;
+import com.example.demo.model.GenreEntity;
 import com.example.demo.model.TdsInfoEntity;
 
 import lombok.extern.slf4j.Slf4j;
@@ -17,23 +19,47 @@ public class Dao {
 
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-	//private KeyHolderFactoryBean keyHolderFactoryBean;
-
 	public Dao(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
 
-	public List<TdsInfoEntity> showAllInfo() {
+	public List<TdsInfoEntity> showInfo() {
 
 		StringBuilder sbSql = new StringBuilder();
 		sbSql.append("SELECT * ");
 		sbSql.append("FROM tds_info ");
-		sbSql.append("ORDER BY id;");
+		sbSql.append("ORDER BY area, id;");
 
 		var rowMapper = BeanPropertyRowMapper.newInstance(TdsInfoEntity.class);
 
 		log.debug(sbSql.toString());
 
+		return namedParameterJdbcTemplate.query(sbSql.toString(), rowMapper);
+	}
+	
+	public List<GenreEntity> showGenre(){
+		
+		StringBuilder sbSql = new StringBuilder();
+		sbSql.append("SELECT * ");
+		sbSql.append("FROM genre ");
+		
+		var rowMapper = BeanPropertyRowMapper.newInstance(GenreEntity.class);
+		
+		log.debug(sbSql.toString());
+		
+		return namedParameterJdbcTemplate.query(sbSql.toString(), rowMapper);
+	}
+	
+	public List<AreaEntity> showArea(){
+		
+		StringBuilder sbSql = new StringBuilder();
+		sbSql.append("SELECT * ");
+		sbSql.append("FROM area ");
+		
+		var rowMapper = BeanPropertyRowMapper.newInstance(AreaEntity.class);
+		
+		log.debug(sbSql.toString());
+		
 		return namedParameterJdbcTemplate.query(sbSql.toString(), rowMapper);
 	}
 
@@ -73,7 +99,7 @@ public class Dao {
 			sbSql.append("WHERE halt_flag = 1 ");
 		}
 		
-		sbSql.append("ORDER BY id;");
+		sbSql.append("ORDER BY area ASC, id ASC;");
 		
 		var rowMapper = BeanPropertyRowMapper.newInstance(TdsInfoEntity.class);
 
@@ -82,11 +108,10 @@ public class Dao {
 		paramSource.addValue("genre", genre);
 		paramSource.addValue("area", area);
 
-		System.out.println(sbSql.toString());
-		System.out.println(paramSource);
+		log.debug(sbSql.toString());
+		log.debug("{}", paramSource);
 
-		var hello = namedParameterJdbcTemplate.query(sbSql.toString(), paramSource, rowMapper);
-		return hello;
+		return namedParameterJdbcTemplate.query(sbSql.toString(), paramSource, rowMapper);
 	}
 
 }

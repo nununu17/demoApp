@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>表示</title>
+  <link rel="stylesheet" th:href="@{/css/bread.css}" />
+</head>
+
+<body>
+  <ul class="bread">
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <a itemprop="item" th:href="@{/admin}">
+        <span itemprop=”name”>管理者トップ</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <span itemprop=”name”>表示トップ</span>
+      <meta itemprop="position" content="2" />
+    </li>
+  </ul>
+
+  <div class="header" style="font-size: 40px;">
+    表示情報選択
+  </div>
+
+  <div class="link">
+    <a th:href="@{/admin/show/info}">パーク情報</a>
+    <a th:href="@{/admin/show/genre}">ジャンル情報</a>
+    <a th:href="@{/admin/show/area}">エリア情報</a>
+  </div>
+
+</body>
+
+</html>

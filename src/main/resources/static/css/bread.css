@@ -8,8 +8,7 @@
 }
 
 .bread li::after{
-  content: '/';
-  padding: 0.5cm;
+  content: '｜';
 }
 
 .bread li:last-child::after{

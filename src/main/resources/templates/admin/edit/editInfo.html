@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>編集ページ</title>
+  <link rel="stylesheet" th:href="@{/css/bread.css}" />
+</head>
+
+<body>
+
+  <ul class="bread">
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <a itemprop="item" th:href="@{/admin}">
+        <span itemprop=”name”>管理者トップ</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <a itemprop="item" th:href="@{/admin/edit}">
+        <span itemprop=”name”>編集トップ</span>
+      </a>
+      <meta itemprop="position" content="2" />
+    </li>
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <span itemprop=”name”>パーク情報</span>
+      <meta itemprop="position" content="3" />
+    </li>
+  </ul>
+  
+  <div class="header">
+    登録情報編集：
+  </div>
+  
+  <div class="input">
+    <form>
+      <label>名前：
+        <input type="text">
+      </label>
+    </form>
+  </div>
+
+</body>
+
+</html>

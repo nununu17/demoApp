@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>エリア情報</title>
+<link rel="stylesheet" th:href="@{/css/bread.css}"/>
+</head>
+<body>
+    <ul class="bread">
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <a itemprop="item" th:href="@{/admin}">
+        <span itemprop=”name”>管理者トップ</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+     <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <a itemprop="item" th:href="@{/admin/show}">
+        <span itemprop=”name”>表示トップ</span>
+      </a>
+      <meta itemprop="position" content="2" />
+    </li>
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <span itemprop=”name”>エリア情報</span>
+      <meta itemprop="position" content="3" />
+    </li>
+  </ul>
+  
+  <div class="title" th:text="${title}" style="font-size: 40px;"></div>
+  
+  <table>
+    <tr>
+      <th>エリア番号</th>
+      <th>エリア略名</th>
+      <th>エリア表示名</th>
+    </tr>
+    <tr th:each="eachArea:${area}">
+      <td th:text="*{eachArea.num}"></td>
+      <td th:text="*{eachArea.name}"></td>
+      <td th:text="*{eachArea.dispName}"></td>
+    </tr>
+  </table>
+
+</body>
+</html>

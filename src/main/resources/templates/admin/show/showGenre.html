@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ジャンル情報</title>
+<link rel="stylesheet" th:href="@{/css/bread.css}"/>
+</head>
+<body>
+  
+      <ul class="bread">
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <a itemprop="item" th:href="@{/admin}">
+        <span itemprop=”name”>管理者トップ</span>
+      </a>
+      <meta itemprop="position" content="1" />
+    </li>
+     <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <a itemprop="item" th:href="@{/admin/show}">
+        <span itemprop=”name”>表示トップ</span>
+      </a>
+      <meta itemprop="position" content="2" />
+    </li>
+    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+      <span itemprop=”name”>ジャンル情報</span>
+      <meta itemprop="position" content="3" />
+    </li>
+  </ul>
+  
+  <div th:text="${title}" style="font-size: 40px;"></div>
+  
+  <table>
+    <tr>
+      <th>ジャンル番号</th>
+      <th>ジャンル略名</th>
+      <th>ジャンル表示名</th>
+    </tr>
+    <tr th:each="eachGenre:${genre}">
+      <td th:text="*{eachGenre.num}"></td>
+      <td th:text="*{eachGenre.name}"></td>
+      <td th:text="*{eachGenre.dispName}"></td>
+    </tr>
+  </table>
+
+</body>
+</html>

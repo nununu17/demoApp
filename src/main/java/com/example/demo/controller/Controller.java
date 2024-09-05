@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.Service.Service;
 import com.example.demo.form.SearchForm;
-import com.example.demo.model.TdsInfoEntity;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("")
@@ -30,25 +27,69 @@ public class Controller {
 		return "/admin/top";
 	}
 	
-	@GetMapping("/admin/showAll")
-	public String showAllInfo(Model model) {
+	@GetMapping("/admin/show")
+	public String show() {
+		return "/admin/show/showTop";
+	}
+	
+	@GetMapping("/admin/show/info")
+	public String showInfo(Model model) {
 		
-		model.addAttribute("title", "all data in tds_info");
+		model.addAttribute("title", "パーク情報");
 		
-		List<TdsInfoEntity> allInfo = service.showAllInfo();
-		model.addAttribute("allInfo", allInfo);
+		model.addAttribute("info", service.showInfo());
 		
-		return "/admin/allInfomation";
+		return "/admin/show/showInfo";
+	}
+	
+	@GetMapping("/admin/show/genre")
+	public String showGenre(Model model) {
 		
+		model.addAttribute("title", "ジャンル情報");
+		
+		model.addAttribute("genre", service.showGenre());
+
+		return "/admin/show/showGenre";
+	}
+	
+	@GetMapping("/admin/show/area")
+	public String showArea(Model model) {
+		
+		model.addAttribute("title", "エリア情報");
+		
+		model.addAttribute("area", service.showArea());
+		
+		return "/admin/show/showArea";
+	}
+	
+	@GetMapping("/admin/edit")
+	public String edit() {
+		return "/admin/edit/editTop";
+	}
+	
+	@GetMapping("/admin/edit/info")
+	public String editInfo() {
+		return "/admin/edit/editInfo";
+	}
+	
+	@GetMapping("/admin/edit/genre")
+	public String editGenre() {
+		
+		return "/admin/edit/editGenre";
+	}
+
+	@GetMapping("/admin/edit/area")
+	public String editArea() {
+		return "/admin/edit/editArea";
 	}
 	
 	@GetMapping("/user")
-	public String showTop(){
+	public String userTop(){
 		return "/tds/top";
 	}
 	
 	@GetMapping("/user/today")
-	public String showToday() {
+	public String today() {
 		return "/tds/planPage";
 	}
 	
@@ -72,4 +113,5 @@ public class Controller {
 		model.addAttribute("resultList", service.search(form.getName(), form.getGenre(), form.getArea(), form.isHaltFlag()));
 		return "tds/searched";
 	}
+	
 }
