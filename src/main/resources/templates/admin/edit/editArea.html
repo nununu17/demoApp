@@ -3,12 +3,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>編集ページ</title>
+  <title>エリア情報編集</title>
   <link rel="stylesheet" th:href="@{/css/bread.css}" />
 </head>
 
 <body>
-
   <ul class="bread">
     <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
       <a itemprop="item" th:href="@{/admin}">
@@ -23,39 +22,43 @@
       <meta itemprop="position" content="2" />
     </li>
     <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
-      <span itemprop=”name”>パーク情報</span>
+      <span itemprop=”name”>エリア情報</span>
       <meta itemprop="position" content="3" />
     </li>
   </ul>
-  
+
   <div class="header">
-    パーク情報編集：
+    エリア情報編集：
   </div>
-  
+
   <div class="input">
-    <form method="POST" th:action="@{/admin/edited/info}" th:object="${infoEditForm}">
-      <div>        
-      <label>ID：
-        <input type="text" th:field="*{id}">
-      </label>
+    <form method="POST" th:action="@{/admin/edited/area}" th:object="${areaEditForm}">
+      <div>
+        <label>番号：
+          <select th:field="*{num}">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
+        </label>
       </div>
       <div>
         <label>名前：
-          <input type="text" th:field="*{name}">
+          <input type="text" class="name" th:field="*{name}">
         </label>
       </div>
       <div>
-        <label>ジャンル番号：
-          <input type="text" th:field="*{genre}">
+        <label>表示名：
+          <input type="text" th:field=*{dispName}>
         </label>
       </div>
-      <div>
-        <label>エリア番号：
-          <input type="text" th:field="*{area}">
-        </label>
-      </div>
-      <div>
-        <button>編集</button>
+      <div class="btn">
+        <button class="editBtn">編集</button>
       </div>
     </form>
   </div>

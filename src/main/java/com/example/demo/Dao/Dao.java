@@ -23,7 +23,7 @@ public class Dao {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
 
-	public List<TdsInfoEntity> showInfo() {
+	public List<TdsInfoEntity> getInfo() {
 
 		StringBuilder sbSql = new StringBuilder();
 		sbSql.append("SELECT * ");
@@ -37,11 +37,12 @@ public class Dao {
 		return namedParameterJdbcTemplate.query(sbSql.toString(), rowMapper);
 	}
 	
-	public List<GenreEntity> showGenre(){
+	public List<GenreEntity> getGenre(){
 		
 		StringBuilder sbSql = new StringBuilder();
 		sbSql.append("SELECT * ");
 		sbSql.append("FROM genre ");
+		sbSql.append("ORDER BY num");
 		
 		var rowMapper = BeanPropertyRowMapper.newInstance(GenreEntity.class);
 		
@@ -50,17 +51,74 @@ public class Dao {
 		return namedParameterJdbcTemplate.query(sbSql.toString(), rowMapper);
 	}
 	
-	public List<AreaEntity> showArea(){
+	public List<AreaEntity> getArea(){
 		
 		StringBuilder sbSql = new StringBuilder();
 		sbSql.append("SELECT * ");
 		sbSql.append("FROM area ");
+		sbSql.append("ORDER BY num ");
 		
 		var rowMapper = BeanPropertyRowMapper.newInstance(AreaEntity.class);
 		
 		log.debug(sbSql.toString());
 		
 		return namedParameterJdbcTemplate.query(sbSql.toString(), rowMapper);
+	}
+	
+	public int editInfo(TdsInfoEntity info) {
+		
+		StringBuilder sbSql = new StringBuilder();
+		sbSql.append("UPDATE tds_info ");
+		sbSql.append("SET name = :name, ");
+		sbSql.append("genre = :genre, ");
+		sbSql.append("area = :area ");
+		sbSql.append("WHERE id = :id ");
+		
+		var paramSource = new MapSqlParameterSource();
+		paramSource.addValue("id", info.getId());
+		paramSource.addValue("name", info.getName());
+		paramSource.addValue("genre", info.getGenre());
+		paramSource.addValue("area", info.getArea());
+		
+		return namedParameterJdbcTemplate.update(sbSql.toString(), paramSource);
+	}
+	
+	public int editGenre(GenreEntity genre) {
+		
+		StringBuilder sbSql = new StringBuilder();
+		sbSql.append("UPDATE genre ");
+		sbSql.append("SET name = :name, ");
+		sbSql.append("disp_name = :dispName ");
+		sbSql.append("WHERE num = :num ");
+		
+		var paramSource = new MapSqlParameterSource();
+		paramSource.addValue("name", genre.getName());
+		paramSource.addValue("dispName", genre.getDispName());
+		paramSource.addValue("num", genre.getNum());
+		
+		log.debug(sbSql.toString());
+		log.debug("{}", paramSource);
+		
+		return namedParameterJdbcTemplate.update(sbSql.toString(),paramSource);
+	}
+	
+	public int editArea(AreaEntity area) {
+		
+		StringBuilder sbSql = new StringBuilder();
+		sbSql.append("UPDATE area ");
+		sbSql.append("SET name = :name, ");
+		sbSql.append("disp_name = :dispName ");
+		sbSql.append("WHERE num = :num ");
+		
+		var paramSource = new MapSqlParameterSource();
+		paramSource.addValue("num", area.getNum());
+		paramSource.addValue("name", area.getName());
+		paramSource.addValue("dispName", area.getDispName());
+		
+		log.debug(sbSql.toString());
+		log.debug("{}", paramSource);
+		
+		return namedParameterJdbcTemplate.update(sbSql.toString(), paramSource);
 	}
 
 	public List<TdsInfoEntity> search(String name, String genre, String area, boolean isHaltFlag) {

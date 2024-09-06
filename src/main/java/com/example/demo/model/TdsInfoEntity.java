@@ -14,7 +14,11 @@ public class TdsInfoEntity {
 	
 	private String genre;
 	
+	private int genreNum;
+	
 	private String area;
+	
+	private int areaNum;
 	
 	private int today;
 	

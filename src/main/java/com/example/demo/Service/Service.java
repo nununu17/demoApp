@@ -21,16 +21,50 @@ public class Service {
 		this.dao = dao;
 	}
 	
-	public List<TdsInfoEntity> showInfo(){
-		return dao.showInfo();
+	public List<TdsInfoEntity> getInfo(){
+		return dao.getInfo();
 	}
 
-	public List<GenreEntity> showGenre(){
-		return dao.showGenre();
+	public List<GenreEntity> getGenre(){
+		return dao.getGenre();
 	}
 	
-	public List<AreaEntity> showArea(){
-		return dao.showArea();
+	public List<AreaEntity> getArea(){
+		return dao.getArea();
+	}
+	
+	@Transactional
+	public int editInfo(int id, String name, int genre, int area) {
+		
+		TdsInfoEntity info = new TdsInfoEntity();
+		info.setId(id);
+		info.setName(name);
+		info.setGenreNum(genre);
+		info.setAreaNum(area);
+		
+		return dao.editInfo(info);
+	}
+	
+	@Transactional
+	public int editGenre(int num, String name, String dispName) {
+		
+		GenreEntity genre = new GenreEntity();
+		genre.setNum(num);
+		genre.setName(name);
+		genre.setDispName(dispName);
+		
+		return dao.editGenre(genre);
+	}
+	
+	@Transactional
+	public int editArea(int num, String name, String dispName) {
+		
+		AreaEntity area = new AreaEntity();
+		area.setNum(num);
+		area.setName(name);
+		area.setDispName(dispName);
+		
+		return dao.editArea(area);
 	}
 	
 	public List<TdsInfoEntity> search(String name, String genre, String area, boolean isHaltFlag){
