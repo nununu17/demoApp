@@ -142,12 +142,12 @@ public class Controller {
 
 	@GetMapping("/user")
 	public String userTop() {
-		return "/tds/top";
+		return "/user/top";
 	}
 
 	@GetMapping("/user/today")
 	public String today() {
-		return "/tds/planPage";
+		return "/user/today0908";
 	}
 
 	@GetMapping("/user/search")
@@ -155,7 +155,7 @@ public class Controller {
 
 		model.addAttribute("searchForm", new SearchForm());
 
-		return "/tds/searching";
+		return "/user/searching";
 	}
 
 	@GetMapping("/user/search/done")
@@ -167,7 +167,7 @@ public class Controller {
 		
 		model.addAttribute(model.addAttribute("terms", form));
 		
-		return "tds/searched";
+		return "user/searched";
 	}
 
 }
