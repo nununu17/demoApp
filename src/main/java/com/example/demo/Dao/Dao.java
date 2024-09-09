@@ -36,135 +36,137 @@ public class Dao {
 
 		return namedParameterJdbcTemplate.query(sbSql.toString(), rowMapper);
 	}
-	
-	public List<GenreEntity> getGenre(){
-		
+
+	public List<GenreEntity> getGenre() {
+
 		StringBuilder sbSql = new StringBuilder();
 		sbSql.append("SELECT * ");
 		sbSql.append("FROM genre ");
 		sbSql.append("ORDER BY num");
-		
+
 		var rowMapper = BeanPropertyRowMapper.newInstance(GenreEntity.class);
-		
+
 		log.debug(sbSql.toString());
-		
+
 		return namedParameterJdbcTemplate.query(sbSql.toString(), rowMapper);
 	}
-	
-	public List<AreaEntity> getArea(){
-		
+
+	public List<AreaEntity> getArea() {
+
 		StringBuilder sbSql = new StringBuilder();
 		sbSql.append("SELECT * ");
 		sbSql.append("FROM area ");
 		sbSql.append("ORDER BY num ");
-		
+
 		var rowMapper = BeanPropertyRowMapper.newInstance(AreaEntity.class);
-		
+
 		log.debug(sbSql.toString());
-		
+
 		return namedParameterJdbcTemplate.query(sbSql.toString(), rowMapper);
 	}
-	
+
 	public int editInfo(TdsInfoEntity info) {
-		
+
 		StringBuilder sbSql = new StringBuilder();
 		sbSql.append("UPDATE tds_info ");
 		sbSql.append("SET name = :name, ");
 		sbSql.append("genre = :genre, ");
 		sbSql.append("area = :area ");
 		sbSql.append("WHERE id = :id ");
-		
+
 		var paramSource = new MapSqlParameterSource();
 		paramSource.addValue("id", info.getId());
 		paramSource.addValue("name", info.getName());
 		paramSource.addValue("genre", info.getGenre());
 		paramSource.addValue("area", info.getArea());
-		
+
 		return namedParameterJdbcTemplate.update(sbSql.toString(), paramSource);
 	}
-	
+
 	public int editGenre(GenreEntity genre) {
-		
+
 		StringBuilder sbSql = new StringBuilder();
 		sbSql.append("UPDATE genre ");
 		sbSql.append("SET name = :name, ");
 		sbSql.append("disp_name = :dispName ");
 		sbSql.append("WHERE num = :num ");
-		
+
 		var paramSource = new MapSqlParameterSource();
 		paramSource.addValue("name", genre.getName());
 		paramSource.addValue("dispName", genre.getDispName());
 		paramSource.addValue("num", genre.getNum());
-		
+
 		log.debug(sbSql.toString());
 		log.debug("{}", paramSource);
-		
-		return namedParameterJdbcTemplate.update(sbSql.toString(),paramSource);
+
+		return namedParameterJdbcTemplate.update(sbSql.toString(), paramSource);
 	}
-	
+
 	public int editArea(AreaEntity area) {
-		
+
 		StringBuilder sbSql = new StringBuilder();
 		sbSql.append("UPDATE area ");
 		sbSql.append("SET name = :name, ");
 		sbSql.append("disp_name = :dispName ");
 		sbSql.append("WHERE num = :num ");
-		
+
 		var paramSource = new MapSqlParameterSource();
 		paramSource.addValue("num", area.getNum());
 		paramSource.addValue("name", area.getName());
 		paramSource.addValue("dispName", area.getDispName());
-		
+
 		log.debug(sbSql.toString());
 		log.debug("{}", paramSource);
-		
+
 		return namedParameterJdbcTemplate.update(sbSql.toString(), paramSource);
 	}
 
-	public List<TdsInfoEntity> search(String name, String genre, String area, boolean isHaltFlag) {
-		
+	public List<TdsInfoEntity> search(TdsInfoEntity info) {
+
 		//parameterSourceは自動で''を結合してしまうので、
 		//あらかじめ%%をname変数の前後に加えておくことであいまい検索を可能にする
-		name = "%" + name + "%";
-		
+		String name = "%" + info.getName() + "%";
+
 		StringBuilder sbSql = new StringBuilder();
-		sbSql.append("SELECT i.name name, g.disp_name genre, a.disp_name area ");
-		sbSql.append("FROM tds_info i ");
-		sbSql.append("LEFT OUTER JOIN genre g ON i.genre = g.num ");
-		sbSql.append("LEFT OUTER JOIN area a ON i.area = a.num ");
-		
-		if(name != "") {
-			sbSql.append("WHERE i.name LIKE :name ");
-			if(genre != "") {
-				sbSql.append("and g.name = :genre ");
-				if(area != "") {
-					sbSql.append("and a.name = :area ");
-				}
-			}
-			if(area != "") {
-				sbSql.append("and a.name = :area ");
-			}
-		}else if(genre != "") {
-			sbSql.append("WHERE g.name = :genre ");
-			if(area != "") {
-				sbSql.append("and a.name = :area ");
-			}
-		}else if(area != "") {
-			sbSql.append("WHERE a.name = :area ");
+		sbSql.append("SELECT i.name name, g.disp_name genre, a.disp_name area, ");
+		sbSql.append("i.halt_flag haltFlag, i.my_recommend myecommend, i.today today ");
+		sbSql.append("FROM tds_info i, area a, genre g ");
+		sbSql.append("WHERE ");
+
+		if (name != "") {
+			sbSql.append(" i.name LIKE :name AND ");
+		}
+
+		if (info.getGenre() != "") {
+			sbSql.append(" g.name = :genre AND ");
 		}
 		
-		if(isHaltFlag) {
-			sbSql.append("WHERE halt_flag = 1 ");
+		if (info.getArea() != "") {
+			sbSql.append(" a.name = :area AND ");
+		}
+
+		if (info.getHaltFlag() == 1) {
+			sbSql.append(" halt_flag = 1 AND ");
 		}
 		
+		if(info.getMyRecommend() == 1) {
+			sbSql.append(" my_recommend = 1 AND ");
+		}
+		
+		if(info.getToday() == 1) {
+			sbSql.append(" today = 1 AND ");
+		}
+		
+		sbSql.append("i.genre = g.num AND ");
+		sbSql.append("i.area = a.num ");
 		sbSql.append("ORDER BY area ASC, id ASC;");
-		
+
 		var rowMapper = BeanPropertyRowMapper.newInstance(TdsInfoEntity.class);
 
 		var paramSource = new MapSqlParameterSource();
 		paramSource.addValue("name", name);
-		paramSource.addValue("genre", genre);
-		paramSource.addValue("area", area);
+		paramSource.addValue("genre", info.getGenre());
+		paramSource.addValue("area", info.getArea());
 
 		log.debug(sbSql.toString());
 		log.debug("{}", paramSource);

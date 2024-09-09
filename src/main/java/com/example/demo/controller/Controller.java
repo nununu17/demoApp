@@ -133,15 +133,6 @@ public class Controller {
 			model.addAttribute("areaEditForm", form);
 		}
 
-		//		if(bindingResult.hasErrors()) {
-		//			
-		//			redirectAttributes.addFlashAttribute(
-		//					bindingResult.MODEL_KEY_PREFIX + "areaEditForm",bindingResult);
-		//			redirectAttributes.addFlashAttribute("areaEditForm", form);
-		//			
-		//			return String.format(REDIRECT_URL_FORMAT, "/admin/edited/area");
-		//		}
-
 		model.addAttribute("edited", service.editArea(form.getNum(), form.getName(), form.getDispName()));
 
 		this.showArea(model);
@@ -170,12 +161,12 @@ public class Controller {
 	@GetMapping("/user/search/done")
 	public String searched(@ModelAttribute SearchForm form, BindingResult bindignResult, Model model) {
 
-		if (!model.containsAttribute("searchForm")) {
-			model.addAttribute("searchForm", form);
-		}
-
 		model.addAttribute("resultList",
-				service.search(form.getName(), form.getGenre(), form.getArea(), form.isHaltFlag()));
+				service.search(
+						form.getName(), form.getGenre(), form.getArea(), form.isHaltFlag(), form.isMyRecommend(), form.isToday()));
+		
+		model.addAttribute(model.addAttribute("terms", form));
+		
 		return "tds/searched";
 	}
 

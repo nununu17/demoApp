@@ -11,12 +11,12 @@
   <ul class="bread">
     <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
       <a itemprop="item" th:href="@{/user}">
-        <span itemprop=”name”>top</span>
+        <span itemprop=”name”>TOP</span>
       </a>
       <meta itemprop="position" content="1" />
     </li>
     <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
-      <span itemprop=”name”>search</span>
+      <span itemprop=”name”>検索</span>
       <meta itemprop="position" content="2" />
     </li>
   </ul>
@@ -63,11 +63,19 @@
         </label>
       </div>
       <div class="">
-        <label>タグで検索：
+        <label>＜タグで検索＞
+          <br>
           <input type="checkbox" th:field="*{haltFlag}">休止中
-          <input type="checkbox" th:field="*{myRecommendation}">わたしのおすすめ
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" th:field="*{myRecommend}">わたしのおすすめ
+        </label>
+        <br>
+        <label>
           <input type="checkbox" th:field="*{today}">Today!
-        </label><br>
+        </label>
+        <br>
       </div>
       <div class="btn">
         <button type="submit" class="submitBtn">検索</button>

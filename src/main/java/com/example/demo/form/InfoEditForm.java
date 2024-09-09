@@ -15,7 +15,7 @@ public class InfoEditForm {
 	
 	private boolean haltFlag;
 	
-	private boolean myRecommendation;
+	private boolean myRecommend;
 	
 	private boolean today;
 

@@ -67,7 +67,16 @@ public class Service {
 		return dao.editArea(area);
 	}
 	
-	public List<TdsInfoEntity> search(String name, String genre, String area, boolean isHaltFlag){
-		return dao.search(name, genre, area, isHaltFlag);
+	public List<TdsInfoEntity> search(String name, String genre, String area, boolean isHaltFlag, boolean isMyRecomendation, boolean isToday){
+		
+		TdsInfoEntity info = new TdsInfoEntity();
+		info.setName(name);
+		info.setGenre(genre);
+		info.setArea(area);
+		info.setHaltFlag(isHaltFlag ? 1 : 0);
+		info.setMyRecommend(isMyRecomendation ? 1 : 0);
+		info.setToday(isToday ? 1 : 0);
+		
+		return dao.search(info);
 	}
 }

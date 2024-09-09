@@ -12,32 +12,37 @@
   <ul class="bread">
     <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
       <a itemprop="item" th:href="@{/user}">
-        <span itemprop=”name”>top</span>
+        <span itemprop=”name”>TOP</span>
       </a>
       <meta itemprop="position" content="1" />
     </li>
     <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
       <a itemprop="item" th:href="@{/user/search}">
-        <span itemprop=”name”>search</span>
+        <span itemprop=”name”>検索</span>
       </a>
       <meta itemprop="position" content="2" />
     </li>
     <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
-      <span itemprop=”name”>search result</span>
+      <span itemprop=”name”>検索結果</span>
       <meta itemprop="position" content="3" />
     </li>
   </ul>
-  
-  <div class="required" th:each="form:${searchForm}">
-     <p class="header">指定された検索条件：</p>
+
+  <div class="required" th:each="eachTerm:${terms}">
+    <p class="header">指定された検索条件</p>
     <div id="name">
-      名前：<soan th:text="*{form.name}"></soan>
+      名前：<span th:text="*{eachTerm.name}"></soan>
     </div>
     <div id="genre">
-      ジャンル：<span th:text="*{form.genre}"></span>
+      ジャンル：<span th:text="*{eachTerm.genre}"></span>
     </div>
     <div id="area">
-      エリア：<span th:text="*{form.area}"></span>
+      エリア：<span th:text="*{eachTerm.area}"></span>
+    </div>
+    <div id="tag">選択タグ：
+      <span th:if="*{eachTerm.haltFlag}">休止中</span>
+      <span th:if="*{eachTerm.myRecommend}">おすすめ</span>
+      <span th:if="*{eachTerm.today}">TODAY</span>
     </div>
   </div>
 
@@ -50,11 +55,17 @@
       <th>名前</th>
       <th>ジャンル</th>
       <th>エリア</th>
+      <th>休止中</th>
+      <th>おすすめ</th>
+      <th>TODAY!</th>
     </tr>
     <tr th:each="result:${resultList}">
       <td th:text="*{result.name}"></td>
       <td th:text="*{result.genre}"></td>
       <td th:text="*{result.area}"></td>
+      <td th:text="*{result.HaltFlag}"></td>
+      <td th:text="*{result.myRecommend}"></td>
+      <td th:text="*{result.today}"></td>
     </tr>
   </table>
 

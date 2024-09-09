@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class SearchForm {
 	
+	private int id;
+	
 	private String name;
 	
 	private String genre;
@@ -13,7 +15,7 @@ public class SearchForm {
 	
 	private boolean haltFlag;
 	
-	private boolean myRecommendation;
+	private boolean myRecommend;
 	
 	private boolean today;
 

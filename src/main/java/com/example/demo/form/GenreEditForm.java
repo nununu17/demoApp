@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class GenreEditForm {
 
-	private int num;
+	private Integer num;
 	
 	private String name;
 	

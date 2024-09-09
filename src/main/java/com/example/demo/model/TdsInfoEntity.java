@@ -24,6 +24,6 @@ public class TdsInfoEntity {
 	
 	private int haltFlag;
 	
-	private int myRecommendation;
+	private int myRecommend;
 
 }
