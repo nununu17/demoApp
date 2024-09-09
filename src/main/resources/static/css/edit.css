@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.header{
+  font-size: 40px;
+}
+
+.errMsg{
+  color: orangered;
+}

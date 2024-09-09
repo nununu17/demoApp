@@ -4,60 +4,66 @@
 <head>
   <meta charset="UTF-8">
   <title>ジャンル情報編集</title>
+  <link rel="stylesheet" th:href="@{/css/edit.css}" />
   <link rel="stylesheet" th:href="@{/css/bread.css}" />
+  <link rel="stylesheet" th:href="@{/js/edit.css}" />
 </head>
 
 <body>
 
-<ul class="bread">
-    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+  <ul class="bread">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <a itemprop="item" th:href="@{/admin}">
         <span itemprop=”name”>管理者トップ</span>
       </a>
       <meta itemprop="position" content="1" />
     </li>
-    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
       <a itemprop="item" th:href="@{/admin/edit}">
         <span itemprop=”name”>編集トップ</span>
       </a>
       <meta itemprop="position" content="2" />
     </li>
-    <li itemprop=”itemListElement” itemscope itemtype=”https://schema.org/ListItem”>
-      <span itemprop=”name”>ジャンル情報</span>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">ジャンル情報</span>
       <meta itemprop="position" content="3" />
     </li>
   </ul>
-  
-  <div class="header" style="font-size: 40px;">
+
+  <div class="header">
     ジャンル情報編集：
   </div>
-  
+
   <div class="input">
     <form method="POST" th:action="@{/admin/edited/genre}" th:object="${genreEditForm}">
       <div>
         <label>番号：
-        <select th:field="*{num}">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-        </select>
+          <select th:field="*{num}">
+            <option value="">選択してください</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+          </select>
         </label>
+        <div class="errMsg" th:if="${#fields.hasErrors('num')}" th:errors="*{num}">err</div>
       </div>
-      <div>        
-      <label>名前：
-        <input type="text" th:field="*{name}">
-      </label>
+      <div>
+        <label>名前：
+          <input type="text" th:field="*{name}">
+        </label>
+        <div class="errMsg" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">err</div>
       </div>
       <div>
         <label>表示名：
           <input type="text" th:field="*{dispName}">
         </label>
+        <div class="errMsg" th:if="${#fields.hasErrors('dispName')}" th:errors="*{dispName}">err</div>
       </div>
       <div>
         <button>編集</button>

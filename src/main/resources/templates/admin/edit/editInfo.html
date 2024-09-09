@@ -4,7 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <title>編集ページ</title>
+  <link rel="stylesheet" th:href="@{/css/edit.css}" />
   <link rel="stylesheet" th:href="@{/css/bread.css}" />
+  <link rel="stylesheet" th:href="@{/js/edit.css}" />
 </head>
 
 <body>
@@ -38,21 +40,25 @@
       <label>ID：
         <input type="text" th:field="*{id}">
       </label>
+      <div class="errMsg" th:if="${#fields.hasErrors('id')}" th:errors="*{id}">err</div>
       </div>
       <div>
         <label>名前：
           <input type="text" th:field="*{name}">
         </label>
+        <div class="errMsg" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">err</div>
       </div>
       <div>
         <label>ジャンル番号：
-          <input type="text" th:field="*{genre}">
+          <input type="text" th:field="*{genre}" placeholder="0~9の数字を入力してください">
         </label>
+        <div class="errMsg" th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}">err</div>
       </div>
       <div>
         <label>エリア番号：
-          <input type="text" th:field="*{area}">
+          <input type="text" th:field="*{area}" placeholder="0~8の数字を入力してください">
         </label>
+        <div class="errMsg" th:if="${#fields.hasErrors('area')}" th:errors="*{area}">err</div>
       </div>
       <div>
         <button>編集</button>
