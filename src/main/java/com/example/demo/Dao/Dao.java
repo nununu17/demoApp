@@ -121,6 +121,48 @@ public class Dao {
 		return namedParameterJdbcTemplate.update(sbSql.toString(), paramSource);
 	}
 
+	public List<TdsInfoEntity> getFood() {
+		StringBuilder sbSql = new StringBuilder();
+		sbSql.append("SELECT i.name, g.disp_name genre, a.disp_name area, ");
+		sbSql.append("FROM tds_info i ");
+		sbSql.append("LEFT OUTER JOIN genre g ON i.genre = g.num ");
+		sbSql.append("LEFT OUTER JOIN area a ON i.area = a.num ");
+		sbSql.append("WHERE i.genre IN (5,6,7) ");
+		sbSql.append("ORDER BY i.area");
+
+		var rowMapper = BeanPropertyRowMapper.newInstance(TdsInfoEntity.class);
+
+		return namedParameterJdbcTemplate.query(sbSql.toString(), rowMapper);
+	}
+
+	public List<TdsInfoEntity> getToday() {
+
+		StringBuilder sbSql = new StringBuilder();
+		sbSql.append("SELECT i.name, g.disp_name genre, a.disp_name area, i.today_comment ");
+		sbSql.append("FROM tds_info i ");
+		sbSql.append("LEFT OUTER JOIN genre g ON i.genre = g.num ");
+		sbSql.append("LEFT OUTER JOIN area a ON i.area = a.num ");
+		sbSql.append("WHERE today = 1");
+
+		var rowMapper = BeanPropertyRowMapper.newInstance(TdsInfoEntity.class);
+
+		return namedParameterJdbcTemplate.query(sbSql.toString(), rowMapper);
+	}
+
+	public List<TdsInfoEntity> getRecommend() {
+		StringBuilder sbSql = new StringBuilder();
+		sbSql.append("SELECT i.name, g.disp_name genre, a.disp_name area, i.recommend_comment ");
+		sbSql.append("FROM tds_info i ");
+		sbSql.append("LEFT OUTER JOIN genre g ON i.genre = g.num ");
+		sbSql.append("LEFT OUTER JOIN area a ON i.area = a.num ");
+		sbSql.append("WHERE i.my_recommend = 1 ");
+		sbSql.append("ORDER BY i.area");
+
+		var rowMapper = BeanPropertyRowMapper.newInstance(TdsInfoEntity.class);
+
+		return namedParameterJdbcTemplate.query(sbSql.toString(), rowMapper);
+	}
+
 	public List<TdsInfoEntity> search(TdsInfoEntity info) {
 
 		//parameterSourceは自動で''を結合してしまうので、
@@ -140,7 +182,7 @@ public class Dao {
 		if (info.getGenre() != "") {
 			sbSql.append(" g.name = :genre AND ");
 		}
-		
+
 		if (info.getArea() != "") {
 			sbSql.append(" a.name = :area AND ");
 		}
@@ -148,15 +190,15 @@ public class Dao {
 		if (info.getHaltFlag() == 1) {
 			sbSql.append(" halt_flag = 1 AND ");
 		}
-		
-		if(info.getMyRecommend() == 1) {
+
+		if (info.getMyRecommend() == 1) {
 			sbSql.append(" my_recommend = 1 AND ");
 		}
-		
-		if(info.getToday() == 1) {
+
+		if (info.getToday() == 1) {
 			sbSql.append(" today = 1 AND ");
 		}
-		
+
 		sbSql.append("i.genre = g.num AND ");
 		sbSql.append("i.area = a.num ");
 		sbSql.append("ORDER BY area ASC, id ASC;");
