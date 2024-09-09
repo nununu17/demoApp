@@ -22,8 +22,12 @@ public class TdsInfoEntity {
 	
 	private int today;
 	
+	private String todayComment;
+	
 	private int haltFlag;
 	
 	private int myRecommend;
+	
+	private String recommendComment;
 
 }

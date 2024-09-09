@@ -64,11 +64,11 @@
         <th>＜エリア＞</th>
         <th>＜コメント＞</th>
       </tr>
-      <tr th:each="eachReco:${recomend}">
+      <tr th:each="eachReco:${recommend}">
         <td th:text="*{eachReco.name}"></td>
         <td th:text="*{eachReco.genre}"></td>
         <td th:text="*{eachReco.area}"></td>
-        <td th:text="*{eachReco.recomendComment}"></td>
+        <td th:text="*{eachReco.recommendComment}"></td>
       </tr>
     </table>
   </div>
